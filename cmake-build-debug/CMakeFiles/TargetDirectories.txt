@@ -1,0 +1,3 @@
+C:/Users/johan/Desktop/SpotifyDisplayer/cmake-build-debug/CMakeFiles/SpotifyDisplayer.dir
+C:/Users/johan/Desktop/SpotifyDisplayer/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/johan/Desktop/SpotifyDisplayer/cmake-build-debug/CMakeFiles/rebuild_cache.dir
