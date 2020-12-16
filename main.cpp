@@ -7,7 +7,7 @@
 using namespace std;
 
 bool isSpotify(const PROCESSENTRY32W &entry) {
-    return std::wstring(entry.szExeFile) == L"Spotify.exe";
+    return wstring(entry.szExeFile) == L"Spotify.exe";
 }
 
 BOOL CALLBACK enumWindowsProc(HWND hwnd, LPARAM lParam) {
