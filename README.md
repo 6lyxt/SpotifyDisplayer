@@ -1,5 +1,5 @@
 # SpotifyDisplayer
-🚀🎶 a project i started for learning purposes
+🚀🎶 an application for displaying a spotify song on i.e xsplit / obs
 
 
 ## Note
