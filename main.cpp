@@ -3,8 +3,11 @@
 #include <vector>
 #include <windows.h>
 #include <tlhelp32.h>
+#include <fstream>
 
 using namespace std;
+
+int writeFile(wstring song);
 
 bool isSpotify(const PROCESSENTRY32W &entry) {
     return wstring(entry.szExeFile) == L"Spotify.exe";
@@ -23,6 +26,7 @@ BOOL CALLBACK enumWindowsProc(HWND hwnd, LPARAM lParam) {
 
             if(title.find('-') != string::npos) {
                 wcout << "Song: " << title << "\n\n";
+                writeFile(title);
             }
         }
     }
@@ -50,4 +54,13 @@ int main() {
 
 
     EnumWindows(enumWindowsProc, reinterpret_cast<LPARAM>(&pids));
+}
+
+int writeFile (wstring song)
+{
+    wofstream filestream;
+    filestream.open ("curtitle.txt");
+    filestream << "Song: " << song;
+    filestream.close();
+    return 0;
 }
