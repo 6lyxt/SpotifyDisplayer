@@ -4,10 +4,19 @@
 #include <windows.h>
 #include <tlhelp32.h>
 #include <fstream>
+#include <chrono>
 
 using namespace std;
 
-int writeFile(wstring song);
+
+int writeFile(wstring song)
+{
+    wofstream filestream;
+    filestream.open ("curtitle.txt");
+    filestream << "Song: " << song;
+    filestream.close();
+    return 0;
+}
 
 bool isSpotify(const PROCESSENTRY32W &entry) {
     return wstring(entry.szExeFile) == L"Spotify.exe";
@@ -24,15 +33,17 @@ BOOL CALLBACK enumWindowsProc(HWND hwnd, LPARAM lParam) {
             wstring title(GetWindowTextLength(hwnd) + 1, L'\0');
             GetWindowTextW(hwnd, &title[0], title.size()); //note: C++11 only
 
-            if(title.find('-') != string::npos) {
-                wcout << "Song: " << title << "\n\n";
-                writeFile(title);
-            }
+                if (title.find('-') != string::npos) {
+                    wcout << "Song: " << title << "\n\n";
+                    writeFile(title);
+                }
+
         }
     }
 
     return TRUE;
 }
+
 
 int main() {
     vector<DWORD> pids;
@@ -42,9 +53,14 @@ int main() {
     PROCESSENTRY32W entry;
     entry.dwSize = sizeof entry;
 
+
     if (!Process32FirstW(snap, &entry)) {
         return 0;
     }
+
+    int n = 2;
+    int mil = n*1000;
+    while(1) {
 
     do {
         if (isSpotify(entry)) {
@@ -54,13 +70,6 @@ int main() {
 
 
     EnumWindows(enumWindowsProc, reinterpret_cast<LPARAM>(&pids));
-}
-
-int writeFile (wstring song)
-{
-    wofstream filestream;
-    filestream.open ("curtitle.txt");
-    filestream << "Song: " << song;
-    filestream.close();
-    return 0;
+    Sleep(mil);
+    }
 }
