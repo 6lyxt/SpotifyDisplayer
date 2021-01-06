@@ -31,7 +31,7 @@ BOOL CALLBACK enumWindowsProc(HWND hwnd, LPARAM lParam) {
     for (DWORD pid : pids) {
         if (winId == pid) {
             wstring title(GetWindowTextLength(hwnd) + 1, L'\0');
-            GetWindowTextW(hwnd, &title[0], title.size()); //note: C++11 only
+            GetWindowTextW(hwnd, &title[0], title.size()); 
 
                 if (title.find('-') != string::npos) {
                     wcout << "Song: " << title << "\n\n";
